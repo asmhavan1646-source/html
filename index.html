@@ -11,15 +11,14 @@
             --bg-color: #0b0c10;
             --secondary-color: #66fcf1;
             --text-main: #ffffff;
-            --discord-color: #5865F2;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
         body { background-color: var(--bg-color); color: var(--text-main); overflow-x: hidden; }
 
-        /* Üst Kısım ve Animasyonlu Logo */
+        /* İlk Karşılama Ekranı */
         .hero {
-            height: 90vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -27,59 +26,33 @@
             text-align: center;
             padding: 20px;
         }
+        
         .logo-img {
-            width: 280px;
-            max-width: 80%;
+            width: 420px;
+            max-width: 95%;
+            cursor: pointer;
             animation: pulseZoom 4s infinite ease-in-out;
-            filter: drop-shadow(0 0 20px rgba(102, 252, 241, 0.3));
+            filter: drop-shadow(0 0 35px rgba(102, 252, 241, 0.45));
+            /* Tıklandığında büyüme süresini tam istediğin gibi 4.5 saniyeye çıkardık */
+            transition: transform 4.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 4.5s ease;
+            z-index: 10;
         }
+        .logo-img:hover { transform: scale(1.06); }
 
         @keyframes pulseZoom {
             0% { transform: scale(1); }
-            40% { transform: scale(1.15); }
-            70% { transform: scale(1.15); }
+            50% { transform: scale(1.04); }
             100% { transform: scale(1); }
         }
 
-        .hero h1 {
-            margin-top: 15px;
-            font-size: 46px;
-            color: var(--secondary-color);
-        }
-        .hero p {
-            color: #c5c6c7;
-            font-size: 17px;
-            margin-top: 8px;
-            margin-bottom: 20px;
-        }
+        .hero h1 { margin-top: 25px; font-size: 58px; color: var(--secondary-color); }
+        .hero p { color: #c5c6c7; font-size: 20px; margin-top: 10px; margin-bottom: 30px; }
 
-        /* Sabit Bot Durum Rozeti */
-        .bot-status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #1f2833;
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            border: 1px solid rgba(102, 252, 241, 0.2);
-            margin-bottom: 25px;
-        }
-        .status-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: #43b581;
-            box-shadow: 0 0 10px rgba(67, 181, 129, 0.8);
-        }
-
-        /* Botu Ekle Butonu */
         .btn-invite {
             background: linear-gradient(135deg, #66fcf1, #45a29e);
             color: #0b0c10;
-            padding: 14px 35px;
-            font-size: 16px;
+            padding: 16px 40px;
+            font-size: 18px;
             font-weight: 700;
             border-radius: 30px;
             text-decoration: none;
@@ -94,9 +67,48 @@
             box-shadow: 0 8px 25px rgba(102, 252, 241, 0.6);
         }
 
-        /* --- ORB / YÖRÜNGE ALANI --- */
+        /* Ana İçerik Ekranı */
+        .main-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            position: relative;
+        }
+        .main-content.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Geri Dön Tuşu (Sağ üst köşe) */
+        .btn-back {
+            position: fixed;
+            top: 25px;
+            right: 30px;
+            background: rgba(31, 40, 51, 0.85);
+            border: 1px solid var(--secondary-color);
+            color: var(--secondary-color);
+            padding: 10px 22px;
+            border-radius: 20px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 4px 15px rgba(102, 252, 241, 0.3);
+            backdrop-filter: blur(5px);
+            transition: background 0.3s, transform 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-back:hover {
+            background: var(--secondary-color);
+            color: #0b0c10;
+            transform: translateY(-2px);
+        }
+
+        /* --- DÖNEN YÖRÜNGE BÖLÜMÜ --- */
         .orbit-section {
-            padding: 90px 20px;
+            padding: 100px 20px;
             max-width: 1150px;
             margin: 0 auto;
             display: flex;
@@ -118,19 +130,42 @@
 
         .orbit-ring {
             position: absolute;
-            border: 1px dashed rgba(102, 252, 241, 0.15);
+            border: 1px dashed rgba(102, 252, 241, 0.2);
             border-radius: 50%;
-            animation: spinRing 35s linear infinite;
+            animation: spinRing 25s linear infinite;
         }
-        .ring-1 { width: 370px; height: 370px; }
-        .ring-2 { width: 480px; height: 480px; animation-direction: reverse; animation-duration: 50s; }
+        .ring-1 { width: 380px; height: 380px; }
+        .ring-2 { width: 480px; height: 480px; animation-direction: reverse; animation-duration: 35s; }
 
         @keyframes spinRing {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
+        .orbit-pill {
+            position: absolute;
+            background: #1f2833;
+            border: 1px solid rgba(102, 252, 241, 0.4);
+            color: var(--secondary-color);
+            padding: 9px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            white-space: nowrap;
+            animation: inherit;
+            animation-direction: reverse;
+        }
+
+        .p-1 { top: -15px; left: 50%; transform: translateX(-50%); }
+        .p-2 { bottom: -15px; left: 50%; transform: translateX(-50%); }
+        .p-3 { top: 20%; right: -25px; }
+        .p-4 { bottom: 20%; left: -25px; }
+        .p-5 { top: 20%; left: -25px; }
+        .p-6 { bottom: 20%; right: -25px; }
+
         .orbit-center-logo {
+            position: absolute;
             width: 170px;
             height: 170px;
             background: #1f2833;
@@ -143,486 +178,360 @@
             z-index: 2;
             animation: pulseZoom 4s infinite ease-in-out;
             padding: 15px;
+            overflow: hidden;
         }
         .orbit-center-logo img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 0 10px rgba(102, 252, 241, 0.4));
+            object-fit: cover;
+            object-position: center;
+            border-radius: 50%;
         }
 
-        .orbit-item {
-            position: absolute;
-            background: #1f2833;
-            border: 1px solid rgba(102, 252, 241, 0.3);
-            color: var(--secondary-color);
-            padding: 9px 18px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            white-space: nowrap;
-            z-index: 3;
-            animation: floatPill 4s ease-in-out infinite alternate;
-        }
+        .orbit-text { flex: 1; min-width: 320px; }
+        .orbit-text h2 { font-size: 34px; color: var(--secondary-color); margin-bottom: 15px; line-height: 1.3; }
+        .orbit-text p { color: #c5c6c7; font-size: 15px; line-height: 1.6; margin-bottom: 25px; }
 
-        .item-1 { top: 35px; left: 30px; animation-delay: 0s; }
-        .item-2 { top: 65px; right: 20px; animation-delay: 1s; }
-        .item-3 { top: 235px; left: -10px; animation-delay: 1.5s; }
-        .item-4 { top: 235px; right: -10px; animation-delay: 0.5s; }
-        .item-5 { bottom: 45px; left: 50px; animation-delay: 2s; }
-        .item-6 { bottom: 45px; right: 60px; animation-delay: 2.5s; }
-
-        @keyframes floatPill {
-            0% { transform: translateY(0px) scale(1); }
-            100% { transform: translateY(-8px) scale(1.03); box-shadow: 0 6px 20px rgba(102, 252, 241, 0.25); }
-        }
-
-        .orbit-text {
-            flex: 1;
-            min-width: 320px;
-        }
-        .orbit-text h2 {
-            font-size: 34px;
-            color: var(--secondary-color);
-            margin-bottom: 15px;
-            line-height: 1.3;
-        }
-        .orbit-text p {
-            color: #c5c6c7;
-            font-size: 15px;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-
-        /* Bölüm Alanı */
-        .content-section {
-            padding: 40px 20px;
-            max-width: 900px;
+        /* --- OYUN KARTLARI --- */
+        .showcase-section {
+            padding: 70px 20px;
+            max-width: 1200px;
             margin: 0 auto;
-        }
-        .section-title {
-            text-align: center;
-            font-size: 32px;
-            color: var(--secondary-color);
-            margin-bottom: 40px;
-        }
-        
-        /* Akordeon Kartları */
-        .feature-card {
-            background: #1f2833;
-            margin-bottom: 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            border-left: 5px solid var(--secondary-color);
-            overflow: hidden;
-        }
-        
-        details { width: 100%; }
-
-        summary {
-            padding: 22px 30px;
             display: flex;
             align-items: center;
-            gap: 20px;
-            cursor: pointer;
-            font-size: 20px;
-            color: var(--secondary-color);
-            font-weight: 600;
-            list-style: none;
-            user-select: none;
+            justify-content: space-between;
+            gap: 60px;
+            flex-wrap: wrap;
+            border-top: 1px solid rgba(102, 252, 241, 0.1);
+        }
+        .showcase-section:nth-child(even) { flex-direction: row-reverse; }
+
+        .showcase-text { flex: 1; min-width: 320px; }
+        .showcase-text h2 { font-size: 36px; color: var(--secondary-color); margin-bottom: 15px; line-height: 1.2; }
+        .showcase-text p { color: #c5c6c7; font-size: 16px; line-height: 1.6; margin-bottom: 25px; }
+
+        .showcase-card-container { flex: 1; min-width: 350px; display: flex; justify-content: center; }
+
+        .discord-preview-card {
+            background: #151a21;
+            border: 1px solid rgba(102, 252, 241, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: cardMove3D 4s ease-in-out infinite alternate;
         }
 
-        summary::-webkit-details-marker { display: none; }
-
-        summary::after {
-            content: '\f107';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            margin-left: auto;
-            font-size: 16px;
-            transition: transform 0.3s;
+        @keyframes cardMove3D {
+            0% { transform: translateY(0px) scale(1); box-shadow: 0 10px 25px rgba(102, 252, 241, 0.15); }
+            100% { transform: translateY(-12px) scale(1.02); box-shadow: 0 18px 35px rgba(102, 252, 241, 0.3); }
         }
 
-        details[open] summary::after {
-            transform: rotate(180deg);
-        }
+        .card-top-row { display: flex; align-items: center; gap: 20px; margin-bottom: 20px; }
 
-        .feature-icon {
-            font-size: 24px;
-            color: var(--secondary-color);
-            background: rgba(102, 252, 241, 0.1);
-            padding: 12px;
-            border-radius: 10px;
+        .card-logo-box {
+            width: 85px;
+            height: 85px;
+            background: #1f2833;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--secondary-color);
+            box-shadow: 0 0 20px rgba(102, 252, 241, 0.4);
+            flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
-        /* Komut Önizleme Kutusu */
-        .command-preview {
-            background: #0b0c10;
-            padding: 10px 18px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin: 0 30px 15px 30px;
-            border: 1px dashed rgba(102, 252, 241, 0.4);
-        }
-        .command-preview code {
-            color: #66fcf1;
-            font-family: monospace;
-            font-size: 15px;
-        }
-        .copy-btn {
-            background: transparent;
-            border: none;
-            color: #c5c6c7;
-            cursor: pointer;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            transition: color 0.2s;
-        }
-        .copy-btn:hover {
-            color: #66fcf1;
+        .card-logo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 50%;
         }
 
-        /* Bilgi Detay Metin Alanı */
-        .info-box {
-            padding: 0 30px 30px 30px;
-            color: #c5c6c7;
-            font-size: 15px;
-            line-height: 1.6;
-        }
+        .card-info-area { flex-grow: 1; }
+        .card-title-text { font-size: 24px; color: var(--secondary-color); font-weight: 700; margin-bottom: 6px; }
+        .card-progress-bar { width: 100%; height: 10px; background: #252e3e; border-radius: 5px; overflow: hidden; position: relative; }
+        .card-progress-fill { width: 100%; height: 100%; background: linear-gradient(90deg, #66fcf1, #45a29e); border-radius: 5px; }
+        .card-details-box { background: #1f2833; border-radius: 12px; padding: 15px; color: #cbd5e1; font-size: 14px; line-height: 1.5; border-left: 4px solid var(--secondary-color); }
 
-        /* Destek Alanı */
-        .support-section {
-            background: #1f2833;
-            padding: 40px;
-            border-radius: 15px;
-            text-align: center;
-            margin-top: 50px;
-            border-top: 4px solid var(--discord-color);
-        }
-        .support-section h3 {
-            font-size: 26px;
-            color: var(--secondary-color);
-            margin-bottom: 10px;
-        }
-        .support-section p {
-            color: #c5c6c7;
-            margin-bottom: 20px;
-            font-size: 15px;
-        }
-        .btn-discord-join {
-            background-color: var(--discord-color);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: background 0.3s;
-        }
-        .btn-discord-join:hover {
-            background-color: #4752c4;
-        }
-
-        /* Toast Bildirim */
-        #toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #1f2833;
-            color: #66fcf1;
-            padding: 12px 24px;
-            border-radius: 10px;
-            border: 1px solid #66fcf1;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            z-index: 9999;
-            transform: translateY(100px);
-            opacity: 0;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-        #toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        /* Footer */
         footer {
             text-align: center;
-            padding: 30px;
+            padding: 40px;
             background: #050507;
             color: #888;
             font-size: 14px;
-            margin-top: 60px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.05);
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 6px;
         }
-        .footer-version {
-            color: #66fcf1;
-            font-weight: 600;
-            font-size: 13px;
-        }
+        .footer-version { color: var(--secondary-color); font-weight: 600; font-size: 14px; }
     </style>
 </head>
 <body>
 
-    <!-- Üst Kısım -->
-    <section class="hero">
-        <img src="logo.png" alt="HelperX Logo" class="logo-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/4712/4712109.png'">
+    <!-- 1. GİRİŞ EKRANI -->
+    <section class="hero" id="heroSection">
+        <img src="logo.png" alt="HelperX Logo" class="logo-img" id="mainLogo" onerror="this.src='logo.jpg'">
         <h1>HelperX</h1>
-        <p>Gelişmiş Ekonomi, Profil ve Eğlence Botu</p>
-        
-        <div class="bot-status-badge">
-            <div class="status-dot"></div>
-            <span>Bot Çevrimiçi</span>
-        </div>
-        
+        <p>Gelişmiş Discord Oyun ve Ekonomi Botu</p>
         <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank">
             <i class="fa-solid fa-robot"></i> Botu Sunucuna Ekle
         </a>
     </section>
 
-    <!-- Orb / Yörünge Alanı -->
-    <section class="orbit-section">
-        <div class="orbit-container">
-            <div class="orbit-ring ring-1"></div>
-            <div class="orbit-ring ring-2"></div>
-            
-            <div class="orbit-center-logo">
-                <img src="logo.png" alt="HelperX" onerror="this.src='https://cdn-icons-png.flaticon.com/512/4712/4712109.png'">
+    <!-- 2. ANA İÇERİK EKRANI -->
+    <div class="main-content" id="mainContent">
+        
+        <!-- Sağ Üst Geri Dön Tuşu -->
+        <button class="btn-back" id="backBtn">
+            <i class="fa-solid fa-arrow-left"></i> Geri Dön
+        </button>
+
+        <!-- Dönen Yörünge Bölümü -->
+        <section class="orbit-section">
+            <div class="orbit-container">
+                <div class="orbit-ring ring-1">
+                    <div class="orbit-pill p-1"><i class="fa-solid fa-dice"></i> Rulet Sistemi</div>
+                    <div class="orbit-pill p-2"><i class="fa-solid fa-calendar-day"></i> Günlük Ödül</div>
+                </div>
+                
+                <div class="orbit-ring ring-2">
+                    <div class="orbit-pill p-3"><i class="fa-solid fa-diamond"></i> Blackjack (HJ)</div>
+                    <div class="orbit-pill p-4"><i class="fa-solid fa-slot-machine"></i> Slot Makinası</div>
+                    <div class="orbit-pill p-5"><i class="fa-solid fa-box-open"></i> Kasa Açılımı</div>
+                    <div class="orbit-pill p-6"><i class="fa-solid fa-user"></i> Kişisel Profil</div>
+                </div>
+                
+                <div class="orbit-center-logo">
+                    <img src="logo.png" alt="HelperX" onerror="this.src='logo.jpg'">
+                </div>
             </div>
 
-            <div class="orbit-item item-1"><i class="fa-solid fa-dice"></i> Rulet Sistemi</div>
-            <div class="orbit-item item-2"><i class="fa-solid fa-diamond"></i> Blackjack (HJ)</div>
-            <div class="orbit-item item-3"><i class="fa-solid fa-slot-machine"></i> Slot Makinası</div>
-            <div class="orbit-item item-4"><i class="fa-solid fa-box-open"></i> Kasa Açılımı</div>
-            <div class="orbit-item item-5"><i class="fa-solid fa-calendar-day"></i> Günlük Ödül</div>
-            <div class="orbit-item item-6"><i class="fa-solid fa-user"></i> Kişisel Profil</div>
-        </div>
+            <div class="orbit-text">
+                <h2>Ekonomi, şans oyunları ve eğlence tek panelden yönetilsin</h2>
+                <p>HelperX ile üyelerin cüzdanlarını büyütebilir, blackjack ve çeşitli şans oyunları oynatabilir, günlük ödüller ve kasalarla sunucunda nefis bir ekonomi ortamı kurabilirsin.</p>
+                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank">
+                    <i class="fa-solid fa-robot"></i> Sunucuna Davet Et
+                </a>
+            </div>
+        </section>
 
-        <div class="orbit-text">
-            <h2>Ekonomi, şans oyunları ve eğlence tek panelden yönetilsin</h2>
-            <p>HelperX ile üyelerin cüzdanlarını büyütebilir, blackjack ve çeşitli şans oyunları oynatabilir, günlük ödüller ve kasalarla sunucunda nefis bir ekonomi ortamı kurabilirsin.</p>
-            <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank">
-                <i class="fa-solid fa-robot"></i> Sunucuna Davet Et
-            </a>
-        </div>
-    </section>
+        <!-- 1. BANKA SİSTEMİ -->
+        <section class="showcase-section">
+            <div class="showcase-text">
+                <h2>Bankaya Para Yatırma Sistemi</h2>
+                <p>Bankaya para yatırarak her 1 saat içinde paranı katlayabilir, faiz geliri elde edebilirsin. Paranı güvende tutmanın ve büyütmenin en iyi yolu!</p>
+                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank"><i class="fa-solid fa-robot"></i> Hemen Dene</a>
+            </div>
+            <div class="showcase-card-container">
+                <div class="discord-preview-card">
+                    <div class="card-top-row">
+                        <div class="card-logo-box"><img src="logo.png" alt="Logo" onerror="this.src='logo.jpg'"></div>
+                        <div class="card-info-area">
+                            <div class="card-title-text">Banka Sistemi</div>
+                            <div class="card-progress-bar"><div class="card-progress-fill"></div></div>
+                        </div>
+                    </div>
+                    <div class="card-details-box"><i class="fa-solid fa-piggy-bank"></i> <b>Kullanım:</b> <code>deposit [miktar]</code><br>Saatlik faiz ile paranı katla!</div>
+                </div>
+            </div>
+        </section>
 
-    <!-- Komut Rehberi ve Detaylar Bölümü -->
-    <section class="content-section">
-        <h2 class="section-title">Bot Komutları ve Rehber</h2>
+        <!-- 2. SHOP SİSTEMİ -->
+        <section class="showcase-section">
+            <div class="showcase-text">
+                <h2>Shop (Mağaza) Sistemi</h2>
+                <p>Biriktirdiğin paralarla mağazadan özel roller ve ödüller satın alabilir, sunucudaki ayrıcalıklarını artırabilirsin.</p>
+                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank"><i class="fa-solid fa-robot"></i> Mağazayı Gör</a>
+            </div>
+            <div class="showcase-card-container">
+                <div class="discord-preview-card">
+                    <div class="card-top-row">
+                        <div class="card-logo-box"><img src="logo.png" alt="Logo" onerror="this.src='logo.jpg'"></div>
+                        <div class="card-info-area">
+                            <div class="card-title-text">Shop Sistemi</div>
+                            <div class="card-progress-bar"><div class="card-progress-fill"></div></div>
+                        </div>
+                    </div>
+                    <div class="card-details-box"><i class="fa-solid fa-store"></i> <b>Kullanım:</b> <code>shop</code><br>Rol ve özel avantajlar satın al!</div>
+                </div>
+            </div>
+        </section>
 
-        <!-- Bankaya Para Yatırma -->
-        <div class="feature-card">
-            <details>
-                <summary>
-                    <div class="feature-icon"><i class="fa-solid fa-piggy-bank"></i></div>
-                    Bankaya Para Yatırma Olayı
-                </summary>
-                <div class="command-preview">
-                    <code>deposit [miktar]</code>
-                    <button class="copy-btn" onclick="copyCommand('deposit', this)"><i class="fa-regular fa-copy"></i> Kopyala</button>
+        <!-- 3. PROFILE SİSTEMİ -->
+        <section class="showcase-section">
+            <div class="showcase-text">
+                <h2>Kişisel Profil Sistemi</h2>
+                <p>Cüzdanındaki parayı, bankandaki toplam servetini ve tüm finansal durumunu tek komutla detaylıca görüntüle.</p>
+                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank"><i class="fa-solid fa-robot"></i> Profiline Bak</a>
+            </div>
+            <div class="showcase-card-container">
+                <div class="discord-preview-card">
+                    <div class="card-top-row">
+                        <div class="card-logo-box"><img src="logo.png" alt="Logo" onerror="this.src='logo.jpg'"></div>
+                        <div class="card-info-area">
+                            <div class="card-title-text">Profil Sistemi</div>
+                            <div class="card-progress-bar"><div class="card-progress-fill"></div></div>
+                        </div>
+                    </div>
+                    <div class="card-details-box"><i class="fa-solid fa-user"></i> <b>Kullanım:</b> <code>profile</code><br>Servetini ve cüzdanını kontrol et!</div>
                 </div>
-                <div class="info-box">
-                    Bankaya para yatırırsan her 1 saat içinde paran katlanır yani faiz işler.<br>
-                    Bankaya atmasan katlanmaz, aynı kalır.
-                </div>
-            </details>
-        </div>
+            </div>
+        </section>
 
-        <!-- Shop -->
-        <div class="feature-card">
-            <details>
-                <summary>
-                    <div class="feature-icon"><i class="fa-solid fa-store"></i></div>
-                    Shop Nedir?
-                </summary>
-                <div class="command-preview">
-                    <code>shop</code>
-                    <button class="copy-btn" onclick="copyCommand('shop', this)"><i class="fa-regular fa-copy"></i> Kopyala</button>
+        <!-- 4. HPAY SİSTEMİ -->
+        <section class="showcase-section">
+            <div class="showcase-text">
+                <h2>Hpay (Para Gönderme)</h2>
+                <p>Sunucudaki diğer kullanıcılara kolayca para transfer edebilir, arkadaşlarını zenginleştirebilir veya borç ödeyebilirsin.</p>
+                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank"><i class="fa-solid fa-robot"></i> Transfer Yap</a>
+            </div>
+            <div class="showcase-card-container">
+                <div class="discord-preview-card">
+                    <div class="card-top-row">
+                        <div class="card-logo-box"><img src="logo.png" alt="Logo" onerror="this.src='logo.jpg'"></div>
+                        <div class="card-info-area">
+                            <div class="card-title-text">Hpay Sistemi</div>
+                            <div class="card-progress-bar"><div class="card-progress-fill"></div></div>
+                        </div>
+                    </div>
+                    <div class="card-details-box"><i class="fa-solid fa-hand-holding-dollar"></i> <b>Kullanım:</b> <code>hpay [@kullanıcı] [miktar]</code><br>Arkadaşına güvenle para gönder!</div>
                 </div>
-                <div class="info-box">
-                    Komutunu kullanarak içinden rol vb. şeyler alabilirsiniz.<br>
-                    Komutu kullanınca nasıl alacağın yazıyor zaten.
-                </div>
-            </details>
-        </div>
+            </div>
+        </section>
 
-        <!-- Profile -->
-        <div class="feature-card">
-            <details>
-                <summary>
-                    <div class="feature-icon"><i class="fa-solid fa-user"></i></div>
-                    Profile Nedir?
-                </summary>
-                <div class="command-preview">
-                    <code>profile</code>
-                    <button class="copy-btn" onclick="copyCommand('profile', this)"><i class="fa-regular fa-copy"></i> Kopyala</button>
+        <!-- 5. HJ OYUNU -->
+        <section class="showcase-section">
+            <div class="showcase-text">
+                <h2>HJ Oyunu (Blackjack)</h2>
+                <p>Klasik Blackjack heyecanını Discord sunucunda yaşa! Miktarını belirle, kartlarını çek ve paranı katlayarak masadan mutlu ayrıl.</p>
+                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank"><i class="fa-solid fa-robot"></i> Masaya Otur</a>
+            </div>
+            <div class="showcase-card-container">
+                <div class="discord-preview-card">
+                    <div class="card-top-row">
+                        <div class="card-logo-box"><img src="logo.png" alt="Logo" onerror="this.src='logo.jpg'"></div>
+                        <div class="card-info-area">
+                            <div class="card-title-text">HJ Oyunu</div>
+                            <div class="card-progress-bar"><div class="card-progress-fill"></div></div>
+                        </div>
+                    </div>
+                    <div class="card-details-box"><i class="fa-solid fa-diamond"></i> <b>Kullanım:</b> <code>hj [miktar]</code><br>Blackjack oynayarak kazancını artır!</div>
                 </div>
-                <div class="info-box">
-                    Bankandaki parayı görüntüler.<br>
-                    Toplam servetini gösterir.<br>
-                    Cüzdanında ne kadar para var gösterir.
-                </div>
-            </details>
-        </div>
+            </div>
+        </section>
 
-        <!-- Hpay -->
-        <div class="feature-card">
-            <details>
-                <summary>
-                    <div class="feature-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
-                    Hpay Nedir?
-                </summary>
-                <div class="command-preview">
-                    <code>hpay [@kullanıcı] [miktar]</code>
-                    <button class="copy-btn" onclick="copyCommand('hpay', this)"><i class="fa-regular fa-copy"></i> Kopyala</button>
+        <!-- 6. HF OYUNU -->
+        <section class="showcase-section">
+            <div class="showcase-text">
+                <h2>HF Oyunu</h2>
+                <p>Heyecan dolu HF şans oyununu oynayarak cüzdanındaki parayı katlama şansı yakala. Risk al, büyük ödülü kazan!</p>
+                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank"><i class="fa-solid fa-robot"></i> Oyunu Oyna</a>
+            </div>
+            <div class="showcase-card-container">
+                <div class="discord-preview-card">
+                    <div class="card-top-row">
+                        <div class="card-logo-box"><img src="logo.png" alt="Logo" onerror="this.src='logo.jpg'"></div>
+                        <div class="card-info-area">
+                            <div class="card-title-text">HF Oyunu</div>
+                            <div class="card-progress-bar"><div class="card-progress-fill"></div></div>
+                        </div>
+                    </div>
+                    <div class="card-details-box"><i class="fa-solid fa-coins"></i> <b>Kullanım:</b> <code>hf [miktar]</code><br>Şansını dene ve ödülü kap!</div>
                 </div>
-                <div class="info-box">
-                    Başka kullanıcıya para gönderebilirsiniz.<br>
-                    Örn: hpay miktar
-                </div>
-            </details>
-        </div>
+            </div>
+        </section>
 
-        <!-- HJ Oyunu -->
-        <div class="feature-card">
-            <details>
-                <summary>
-                    <div class="feature-icon"><i class="fa-solid fa-diamond"></i></div>
-                    HJ Oyunu (Blackjack)
-                </summary>
-                <div class="command-preview">
-                    <code>hj [miktar]</code>
-                    <button class="copy-btn" onclick="copyCommand('hj', this)"><i class="fa-regular fa-copy"></i> Kopyala</button>
+        <!-- 7. HS OYUNU -->
+        <section class="showcase-section">
+            <div class="showcase-text">
+                <h2>HS Oyunu</h2>
+                <p>HS komutunu kullanarak miktar belirtip şansını deneyebilir, sunucundaki üyelerle rekabet ederek paranı katlayabilirsin.</p>
+                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank"><i class="fa-solid fa-robot"></i> Hemen Dene</a>
+            </div>
+            <div class="showcase-card-container">
+                <div class="discord-preview-card">
+                    <div class="card-top-row">
+                        <div class="card-logo-box"><img src="logo.png" alt="Logo" onerror="this.src='logo.jpg'"></div>
+                        <div class="card-info-area">
+                            <div class="card-title-text">HS Oyunu</div>
+                            <div class="card-progress-bar"><div class="card-progress-fill"></div></div>
+                        </div>
+                    </div>
+                    <div class="card-details-box"><i class="fa-solid fa-gamepad"></i> <b>Kullanım:</b> <code>hs [miktar]</code><br>Bu komutu yazarak şans oyununu oynayabilirsin!</div>
                 </div>
-                <div class="info-box">
-                    Bu komutu yazıp oyun oynayabilirsiniz.<br>
-                    Örn: hj miktar
-                </div>
-            </details>
-        </div>
+            </div>
+        </section>
 
-        <!-- HF Oyunu -->
-        <div class="feature-card">
-            <details>
-                <summary>
-                    <div class="feature-icon"><i class="fa-solid fa-coins"></i></div>
-                    HF Oyunu
-                </summary>
-                <div class="command-preview">
-                    <code>hf [miktar]</code>
-                    <button class="copy-btn" onclick="copyCommand('hf', this)"><i class="fa-regular fa-copy"></i> Kopyala</button>
+        <!-- 8. KASA SİSTEMİ -->
+        <section class="showcase-section">
+            <div class="showcase-text">
+                <h2>Kasa Açılımı Sistemi</h2>
+                <p>Normal, Lüks ve Mega olmak üzere 3 farklı kasa türü bulunur. Kasaları açarak büyük miktarlarda nakit ödüllerin sahibi ol!</p>
+                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank"><i class="fa-solid fa-robot"></i> Kasa Aç</a>
+            </div>
+            <div class="showcase-card-container">
+                <div class="discord-preview-card">
+                    <div class="card-top-row">
+                        <div class="card-logo-box"><img src="logo.png" alt="Logo" onerror="this.src='logo.jpg'"></div>
+                        <div class="card-info-area">
+                            <div class="card-title-text">Kasa Sistemi</div>
+                            <div class="card-progress-bar"><div class="card-progress-fill"></div></div>
+                        </div>
+                    </div>
+                    <div class="card-details-box"><i class="fa-solid fa-box-open"></i> <b>Kullanım:</b> <code>kasa [normal/lüks/mega]</code><br>Kasayı aç ve servetine servet kat!</div>
                 </div>
-                <div class="info-box">
-                    Bu komutu yazıp oyun oynayabilirsiniz.<br>
-                    Örn: hf miktar
-                </div>
-            </details>
-        </div>
+            </div>
+        </section>
 
-        <!-- HS Oyunu -->
-        <div class="feature-card">
-            <details>
-                <summary>
-                    <div class="feature-icon"><i class="fa-solid fa-slot-machine"></i></div>
-                    HS Oyunu
-                </summary>
-                <div class="command-preview">
-                    <code>hs [miktar]</code>
-                    <button class="copy-btn" onclick="copyCommand('hs', this)"><i class="fa-regular fa-copy"></i> Kopyala</button>
-                </div>
-                <div class="info-box">
-                    Bu komutu yazıp oyun oynayabilirsiniz.<br>
-                    Örn: hs miktar
-                </div>
-            </details>
-        </div>
+        <footer>
+            <span class="footer-version">HelperX v1.0 Sürümü</span>
+            <p>&copy; 2026 HelperX. Tüm Hakları Saklıdır.</p>
+        </footer>
 
-        <!-- Kasa -->
-        <div class="feature-card">
-            <details>
-                <summary>
-                    <div class="feature-icon"><i class="fa-solid fa-box-open"></i></div>
-                    Kasa Nedir?
-                </summary>
-                <div class="command-preview">
-                    <code>kasa [normal/lüks/mega]</code>
-                    <button class="copy-btn" onclick="copyCommand('kasa normal', this)"><i class="fa-regular fa-copy"></i> Kopyala</button>
-                </div>
-                <div class="info-box">
-                    3 farklı kasa vardır:<br>
-                    - Normal<br>
-                    - Lüks<br>
-                    - Mega<br>
-                    Atıyorum normali açtın 10 bin ila 50 bin arasında verir.
-                </div>
-            </details>
-        </div>
-
-        <!-- Destek / DM Modmail Alanı -->
-        <div class="support-section">
-            <h3>Yardıma mı ihtiyacın var?</h3>
-            <p>Hata bildirimi, öneriler veya destek almak için butona tıklayarak doğrudan botuma özel mesaj (DM) gönderebilirsin!</p>
-            <a href="https://discord.com/users/1535214032137756702" class="btn-discord-join" target="_blank">
-                <i class="fa-brands fa-discord"></i> Bot ile DM'den İletişime Geç
-            </a>
-        </div>
-    </section>
-
-    <!-- Sağ Alt Köşe Bildirim Kutusu -->
-    <div id="toast">
-        <i class="fa-solid fa-circle-check"></i>
-        <span id="toastText">Komut panoya kopyalandı!</span>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <span class="footer-version">HelperX v1.0 Sürümü</span>
-        <p>&copy; 2026 HelperX. Tüm Hakları Saklıdır.</p>
-    </footer>
-
-    <!-- Scriptler -->
+    <!-- Script: ~4.5 Saniyelik Sinematik Büyüme ve Geri Dönüş Mantığı -->
     <script>
-        function copyCommand(text, btn) {
-            navigator.clipboard.writeText(text);
-            
-            let originalHTML = btn.innerHTML;
-            btn.innerHTML = '<i class="fa-solid fa-check"></i> Kopyalandı';
-            btn.style.color = '#66fcf1';
+        const logo = document.getElementById('mainLogo');
+        const heroSection = document.getElementById('heroSection');
+        const mainContent = document.getElementById('mainContent');
+        const backBtn = document.getElementById('backBtn');
 
-            showToast(`"${text}" komutu kopyalandı!`);
+        // Logoya tıklayınca ~4.5 saniye süren devasa büyüme animasyonu
+        logo.addEventListener('click', function() {
+            this.style.transform = 'scale(8)';
+            this.style.opacity = '0';
+
+            // Animasyon süresiyle tam uyumlu olacak şekilde 4.3 saniye sonra diğer sayfayı açıyoruz
+            setTimeout(() => {
+                heroSection.style.display = 'none';
+                mainContent.classList.add('active');
+                window.scrollTo(0, 0);
+            }, 4300);
+        });
+
+        // Geri Dön tuşuna basınca ilk ekrana pürüzsüz dönüş
+        backBtn.addEventListener('click', function() {
+            mainContent.classList.remove('active');
+            heroSection.style.display = 'flex';
+            
+            // Logoyu anında eski boyutuna sıfırlıyoruz
+            logo.style.transition = 'none';
+            logo.style.transform = 'scale(1)';
+            logo.style.opacity = '1';
 
             setTimeout(() => {
-                btn.innerHTML = originalHTML;
-                btn.style.color = '#c5c6c7';
-            }, 1500);
-        }
+                logo.style.transition = 'transform 4.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 4.5s ease';
+            }, 50);
 
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            const toastText = document.getElementById('toastText');
-            toastText.innerText = message;
-            
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2000);
-        }
+            window.scrollTo(0, 0);
+        });
     </script>
 
 </body>
