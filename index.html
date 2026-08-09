@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HelperX - Komut Rehberi</title>
+    <title>HelperX Komut Rehberi</title>
     <style>
         * {
             box-sizing: border-box;
@@ -97,64 +97,96 @@
                 <span class="arrow">▼</span>
             </div>
             <div class="accordion-content">
-                Bankaya para yatırdığında her 1 saat içinde paran katlanarak artar (faiz sistemi işler). Paranı bankaya atmayıp cüzdanında tutarsan katlanmaz, sabit kalır.
+                Bankaya para yatırırsan her 1 saat içinde paran katlanır yani faiz.<br>
+                Bankaya atmasan katlanmaz aynı kalır.
             </div>
         </div>
 
         <!-- Shop -->
         <div class="accordion-item">
             <div class="accordion-header">
-                <h3><div class="icon-box">◆</div> Shop (Mağaza)</h3>
+                <h3><div class="icon-box">◆</div> Shop Nedir?</h3>
                 <span class="arrow">▼</span>
             </div>
             <div class="accordion-content">
-                Bu komutu kullanarak mağazaya göz atabilir; içeriden özel roller ve avantajlı eşyalar satın alabilirsin. Komutu Discord'da yazdığında satın alma işlemini nasıl yapacağın detaylıca ekranda belirecektir.
+                Komutunu kullanarak içinden rol vb. şeyler alabilirsiniz.<br>
+                Komutu kullanınca nasıl alacağın yazıyor zaten.
             </div>
         </div>
 
         <!-- Profile -->
         <div class="accordion-item">
             <div class="accordion-header">
-                <h3><div class="icon-box">◆</div> Profile (Profil)</h3>
+                <h3><div class="icon-box">◆</div> Profile Nedir?</h3>
                 <span class="arrow">▼</span>
             </div>
             <div class="accordion-content">
-                Bankanda ne kadar para olduğunu, cüzdanındaki nakit miktarını ve toplam servetini tek bir bakışta görüntülemeni sağlar.
+                Bankandaki parayı görüntüler.<br>
+                Toplam servetini gösterir.<br>
+                Cüzdanında ne kadar para var gösterir.
             </div>
         </div>
 
         <!-- Hpay -->
         <div class="accordion-item">
             <div class="accordion-header">
-                <h3><div class="icon-box">◆</div> Hpay (Para Gönderme)</h3>
+                <h3><div class="icon-box">◆</div> Hpay Nedir?</h3>
                 <span class="arrow">▼</span>
             </div>
             <div class="accordion-content">
-                Sunucudaki diğer kullanıcılara kolayca para göndermeni sağlar.<br>
-                <strong>Kullanım Örneği:</strong> hpay @kullanici miktar
+                Başka kullanıcıya para gönderebilirsiniz.<br>
+                Kullanım: hpay miktar
             </div>
         </div>
 
-        <!-- Oyunlar (HJ, HF, HS) -->
+        <!-- HJ Oyunu -->
         <div class="accordion-item">
             <div class="accordion-header">
-                <h3><div class="icon-box">◆</div> HJ - HF - HS Oyunları</h3>
+                <h3><div class="icon-box">◆</div> HJ Oyunu</h3>
                 <span class="arrow">▼</span>
             </div>
             <div class="accordion-content">
-                Bu komutları kullanarak eğlenceli şans ve kumar oyunları oynayabilir, paranı katlayabilirsin.<br>
-                <strong>Kullanım Örneği:</strong> hj miktar (Örn: hj 5000)
+                Bu komutu yazıp oyun oynayabilirsiniz.<br>
+                Örn: hj miktar
+            </div>
+        </div>
+
+        <!-- HF Oyunu -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3><div class="icon-box">◆</div> HF Oyunu</h3>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="accordion-content">
+                Bu komutu yazıp oyun oynayabilirsiniz.<br>
+                Örn: hf miktar
+            </div>
+        </div>
+
+        <!-- HS Oyunu -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3><div class="icon-box">◆</div> HS Oyunu</h3>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="accordion-content">
+                Bu komutu yazıp oyun oynayabilirsiniz.<br>
+                Örn: hs miktar
             </div>
         </div>
 
         <!-- Kasa -->
         <div class="accordion-item">
             <div class="accordion-header">
-                <h3><div class="icon-box">◆</div> Kasalar</h3>
+                <h3><div class="icon-box">◆</div> Kasa Nedir?</h3>
                 <span class="arrow">▼</span>
             </div>
             <div class="accordion-content">
-                Sistemde Normal, Lüks ve Mega olmak üzere 3 farklı kasa türü bulunur. Örneğin Normal kasayı açtığında şansına bağlı olarak 10 bin ile 50 bin arasında rastgele nakit ödül kazanabilirsin. Diğer kasalarda bu ödüller katlanarak artar!
+                3 farklı kasa vardır:<br>
+                - Normal<br>
+                - Lüks<br>
+                - Mega<br>
+                Atıyorum normali açtın 10 bin ila 50 bin arasında verir.
             </div>
         </div>
 
@@ -166,9 +198,6 @@
         items.forEach(item => {
             const header = item.querySelector('.accordion-header');
             header.addEventListener('click', () => {
-                // Diğer açık olanları kapatmak istersen bu bloğu açabilirsin
-                // items.forEach(i => { if(i !== item) i.classList.remove('active'); });
-                
                 item.classList.toggle('active');
             });
         });
