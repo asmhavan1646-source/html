@@ -3,699 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HelperX | Resmi Site</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>HelperX - Komut Rehberi</title>
     <style>
-        :root {
-            --bg-color: #0b0c10;
-            --secondary-color: #66fcf1;
-            --text-main: #ffffff;
-            --discord-color: #5865F2;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-main); overflow-x: hidden; }
-
-        /* Üst Kısım ve Animasyonlu Logo */
-        .hero {
-            height: 90vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
             padding: 20px;
         }
-        .logo-img {
-            width: 280px;
-            max-width: 80%;
-            animation: pulseZoom 4s infinite ease-in-out;
-            filter: drop-shadow(0 0 20px rgba(102, 252, 241, 0.3));
-        }
-
-        @keyframes pulseZoom {
-            0% { transform: scale(1); }
-            40% { transform: scale(1.15); }
-            70% { transform: scale(1.15); }
-            100% { transform: scale(1); }
-        }
-
-        .hero h1 {
-            margin-top: 15px;
-            font-size: 46px;
-            color: var(--secondary-color);
-        }
-        .hero p {
-            color: #c5c6c7;
-            font-size: 17px;
-            margin-top: 8px;
-            margin-bottom: 20px;
-        }
-
-        /* Sabit Bot Durum Rozeti */
-        .bot-status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #1f2833;
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            border: 1px solid rgba(102, 252, 241, 0.2);
-            margin-bottom: 25px;
-        }
-        .status-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: #43b581;
-            box-shadow: 0 0 10px rgba(67, 181, 129, 0.8);
-        }
-
-        /* Botu Ekle Butonu */
-        .btn-invite {
-            background: linear-gradient(135deg, #66fcf1, #45a29e);
-            color: #0b0c10;
-            padding: 14px 35px;
-            font-size: 16px;
-            font-weight: 700;
-            border-radius: 30px;
-            text-decoration: none;
-            box-shadow: 0 5px 20px rgba(102, 252, 241, 0.4);
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .btn-invite:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(102, 252, 241, 0.6);
-        }
-
-        /* --- GÖRSELDEKİ ORB / BÜYÜTÜLMÜŞ YÖRÜNGE ALANI --- */
-        .orbit-section {
-            padding: 90px 20px;
-            max-width: 1150px;
+        .container {
+            max-width: 800px;
             margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #38bdf8;
+        }
+        .accordion-item {
+            background-color: #1e293b;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            border: 1px solid #334155;
+            transition: all 0.3s ease;
+        }
+        .accordion-header {
+            padding: 18px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 50px;
-            flex-wrap: wrap;
-        }
-
-        .orbit-container {
-            position: relative;
-            width: 500px;
-            height: 500px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-        }
-
-        /* Arkadaki dairesel çizgi yörüngeleri */
-        .orbit-ring {
-            position: absolute;
-            border: 1px dashed rgba(102, 252, 241, 0.15);
-            border-radius: 50%;
-            animation: spinRing 35s linear infinite;
-        }
-        .ring-1 { width: 370px; height: 370px; }
-        .ring-2 { width: 480px; height: 480px; animation-direction: reverse; animation-duration: 50s; }
-
-        @keyframes spinRing {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* Merkezdeki Büyütülmüş Logomuz */
-        .orbit-center-logo {
-            width: 170px;
-            height: 170px;
-            background: #1f2833;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 40px rgba(102, 252, 241, 0.35);
-            border: 2px solid rgba(102, 252, 241, 0.5);
-            z-index: 2;
-            animation: pulseZoom 4s infinite ease-in-out;
-            padding: 15px;
-        }
-        .orbit-center-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 0 10px rgba(102, 252, 241, 0.4));
-        }
-
-        /* Etraftaki Hareketli Hap (Pill) Butonlar */
-        .orbit-item {
-            position: absolute;
-            background: #1f2833;
-            border: 1px solid rgba(102, 252, 241, 0.3);
-            color: var(--secondary-color);
-            padding: 9px 18px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            white-space: nowrap;
-            z-index: 3;
-            animation: floatPill 4s ease-in-out infinite alternate;
-        }
-
-        /* Genişletilmiş Çember Üzerindeki Konumlar */
-        .item-1 { top: 35px; left: 30px; animation-delay: 0s; }
-        .item-2 { top: 65px; right: 20px; animation-delay: 1s; }
-        .item-3 { top: 235px; left: -10px; animation-delay: 1.5s; }
-        .item-4 { top: 235px; right: -10px; animation-delay: 0.5s; }
-        .item-5 { bottom: 45px; left: 50px; animation-delay: 2s; }
-        .item-6 { bottom: 45px; right: 60px; animation-delay: 2.5s; }
-
-        @keyframes floatPill {
-            0% { transform: translateY(0px) scale(1); }
-            100% { transform: translateY(-8px) scale(1.03); box-shadow: 0 6px 20px rgba(102, 252, 241, 0.25); }
-        }
-
-        .orbit-text {
-            flex: 1;
-            min-width: 320px;
-        }
-        .orbit-text h2 {
-            font-size: 34px;
-            color: var(--secondary-color);
-            margin-bottom: 15px;
-            line-height: 1.3;
-        }
-        .orbit-text p {
-            color: #c5c6c7;
-            font-size: 15px;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-
-        /* Bölüm Alanı */
-        .content-section {
-            padding: 40px 20px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .section-title {
-            text-align: center;
-            font-size: 32px;
-            color: var(--secondary-color);
-            margin-bottom: 40px;
-        }
-        
-        /* Açılır Kapanır Akordeon Kartları */
-        .feature-card {
-            background: #1f2833;
-            margin-bottom: 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            border-left: 5px solid var(--secondary-color);
-            overflow: hidden;
-        }
-        
-        details { width: 100%; }
-
-        summary {
-            padding: 22px 30px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
             cursor: pointer;
-            font-size: 20px;
-            color: var(--secondary-color);
-            font-weight: 600;
-            list-style: none;
             user-select: none;
         }
-
-        summary::-webkit-details-marker { display: none; }
-
-        summary::after {
-            content: '\f107';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            margin-left: auto;
-            font-size: 16px;
-            transition: transform 0.3s;
+        .accordion-header h3 {
+            font-size: 18px;
+            color: #38bdf8;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
-
-        details[open] summary::after {
-            transform: rotate(180deg);
-        }
-
-        .feature-icon {
-            font-size: 24px;
-            color: var(--secondary-color);
-            background: rgba(102, 252, 241, 0.1);
-            padding: 12px;
-            border-radius: 10px;
+        .icon-box {
+            background: #0ea5e9;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        /* Kopyalanabilir Komut Önizleme Kutusu */
-        .command-preview {
-            background: #0b0c10;
-            padding: 10px 18px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin: 0 30px 15px 30px;
-            border: 1px dashed rgba(102, 252, 241, 0.4);
-        }
-        .command-preview code {
-            color: #66fcf1;
-            font-family: monospace;
-            font-size: 15px;
-        }
-        .copy-btn {
-            background: transparent;
-            border: none;
-            color: #c5c6c7;
-            cursor: pointer;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            transition: color 0.2s;
-        }
-        .copy-btn:hover {
-            color: #66fcf1;
-        }
-
-        /* Video Alanı */
-        .video-box { padding: 0 30px 30px 30px; }
-
-        video {
-            width: 100%;
-            border-radius: 10px;
-            border: 2px solid rgba(102, 252, 241, 0.3);
-            background: black;
-            display: block;
-        }
-
-        /* Destek / DM Modmail Alanı */
-        .support-section {
-            background: #1f2833;
-            padding: 40px;
-            border-radius: 15px;
-            text-align: center;
-            margin-top: 50px;
-            border-top: 4px solid var(--discord-color);
-        }
-        .support-section h3 {
-            font-size: 26px;
-            color: var(--secondary-color);
-            margin-bottom: 10px;
-        }
-        .support-section p {
-            color: #c5c6c7;
-            margin-bottom: 20px;
-            font-size: 15px;
-        }
-        .btn-discord-join {
-            background-color: var(--discord-color);
             color: white;
-            padding: 12px 30px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: background 0.3s;
-        }
-        .btn-discord-join:hover {
-            background-color: #4752c4;
-        }
-
-        /* Köşe Bildirim Kutusu (Toast Notification) */
-        #toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #1f2833;
-            color: #66fcf1;
-            padding: 12px 24px;
-            border-radius: 10px;
-            border: 1px solid #66fcf1;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            z-index: 9999;
-            transform: translateY(100px);
-            opacity: 0;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-        #toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 30px;
-            background: #050507;
-            color: #888;
             font-size: 14px;
-            margin-top: 60px;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
         }
-        .footer-version {
-            color: #66fcf1;
-            font-weight: 600;
-            font-size: 13px;
+        .arrow {
+            transition: transform 0.3s ease;
+            font-size: 14px;
+            color: #94a3b8;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            background-color: #0f172a;
+            padding: 0 20px;
+            color: #cbd5e1;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .accordion-item.active .accordion-content {
+            max-height: 300px;
+            padding: 15px 20px 20px 20px;
+            border-top: 1px solid #334155;
+        }
+        .accordion-item.active .arrow {
+            transform: rotate(180deg);
+            color: #38bdf8;
         }
     </style>
 </head>
 <body>
 
-    <!-- Logo, Slogan, Durum ve Botu Ekle Butonu -->
-    <section class="hero">
-        <img src="logo.png" alt="HelperX Logo" class="logo-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/4712/4712109.png'">
-        <h1>HelperX</h1>
-        <p>Gelişmiş Ekonomi, Profil ve Eğlence Botu</p>
-        
-        <!-- Sabit Bot Durum Göstergesi -->
-        <div class="bot-status-badge">
-            <div class="status-dot"></div>
-            <span>Bot Çevrimiçi</span>
-        </div>
-        
-        <!-- Botu Sunucuya Ekle Butonu -->
-        <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank">
-            <i class="fa-solid fa-robot"></i> Botu Sunucuna Ekle
-        </a>
-    </section>
+    <div class="container">
+        <h1>HelperX Komut Rehberi</h1>
 
-    <!-- --- BÜYÜTÜLMÜŞ ORB / HAREKETLİ OYUNLAR BÖLÜMÜ --- -->
-    <section class="orbit-section">
-        <div class="orbit-container">
-            <div class="orbit-ring ring-1"></div>
-            <div class="orbit-ring ring-2"></div>
-            
-            <!-- Merkezdeki Büyütülmüş Logomuz -->
-            <div class="orbit-center-logo">
-                <img src="logo.png" alt="HelperX" onerror="this.src='https://cdn-icons-png.flaticon.com/512/4712/4712109.png'">
+        <!-- Banka -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3><div class="icon-box">◆</div> Bankaya Para Yatırma Olayı</h3>
+                <span class="arrow">▼</span>
             </div>
-
-            <!-- Etraftaki Hareketli Oyun ve Özellik Hapları -->
-            <div class="orbit-item item-1"><i class="fa-solid fa-dice"></i> Rulet Sistemi</div>
-            <div class="orbit-item item-2"><i class="fa-solid fa-diamond"></i> Blackjack (HJ)</div>
-            <div class="orbit-item item-3"><i class="fa-solid fa-slot-machine"></i> Slot Makinası</div>
-            <div class="orbit-item item-4"><i class="fa-solid fa-box-open"></i> Kasa Açılımı</div>
-            <div class="orbit-item item-5"><i class="fa-solid fa-calendar-day"></i> Günlük Ödül</div>
-            <div class="orbit-item item-6"><i class="fa-solid fa-user"></i> Kişisel Profil</div>
+            <div class="accordion-content">
+                Bankaya para yatırdığında her 1 saat içinde paran katlanarak artar (faiz sistemi işler). Paranı bankaya atmayıp cüzdanında tutarsan katlanmaz, sabit kalır.
+            </div>
         </div>
 
-        <div class="orbit-text">
-            <h2>Ekonomi, şans oyunları ve eğlence tek panelden yönetilsin</h2>
-            <p>HelperX ile üyelerin cüzdanlarını büyütebilir, rulet ve blackjack gibi heyecanlı oyunlar oynatabilir, günlük ödüller ve kasalarla sunucunda nefis bir ekonomi ortamı kurabilirsin.</p>
-            <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank">
-                <i class="fa-solid fa-robot"></i> Sunucuna Davet Et
-            </a>
-        </div>
-    </section>
-
-    <!-- Komutlar ve Videolar Bölümü -->
-    <section class="content-section">
-        <h2 class="section-title">Bot Komutları ve Tanıtımlar</h2>
-
-        <!-- 1. h -->
-        <div class="feature-card">
-            <details>
-                <summary>
-                    <div class="feature-icon"><i class="fa-solid fa-wallet"></i></div>
-                    Cüzdan Görüntüleme
-                </summary>
-                <div class="command-preview">
-                    <code>h</code>
-                    <button class="copy-btn" onclick="copyCommand('h', this)"><i class="fa-regular fa-copy"></i> Kopyala</button>
-                </div>
-                <div class="video-box"><video controls><source src="h.mp4" type="video/mp4">Tarayıcınız bu videoyu desteklemiyor.</video></div>
-            </details>
+        <!-- Shop -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3><div class="icon-box">◆</div> Shop (Mağaza)</h3>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="accordion-content">
+                Bu komutu kullanarak mağazaya göz atabilir; içeriden özel roller ve avantajlı eşyalar satın alabilirsin. Komutu Discord'da yazdığında satın alma işlemini nasıl yapacağın detaylıca ekranda belirecektir.
+            </div>
         </div>
 
-        <!-- 2. profile -->
-        <div class="feature-card">
-            <details>
-                <summary>
-                    <div class="feature-icon"><i class="fa-solid fa-user"></i></div>
-                    Kişisel Profil Gösterimi
-                </summary>
-                <div class="command-preview">
-                    <code>profile</code>
-                    <button class="copy-btn" onclick="copyCommand('profile', this)"><i class="fa-regular fa-copy"></i> Kopyala</button>
-                </div>
-                <div class="video-box"><video controls><source src="profile.mp4" type="video/mp4">Tarayıcınız bu videoyu desteklemiyor.</video></div>
-            </details>
+        <!-- Profile -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3><div class="icon-box">◆</div> Profile (Profil)</h3>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="accordion-content">
+                Bankanda ne kadar para olduğunu, cüzdanındaki nakit miktarını ve toplam servetini tek bir bakışta görüntülemeni sağlar.
+            </div>
         </div>
 
-        <!-- 3. deposit -->
-        <div class="feature-card">
-            <details>
-                <summary>
-                    <div class="feature-icon"><i class="fa-solid fa-piggy-bank"></i></div>
-                    Bankaya Para Yatırma
-                </summary>
-                <div class="command-preview">
-                    <code>deposit [miktar]</code>
-                    <button class="copy-btn" onclick="copyCommand('deposit', this)"><i class="fa-regular fa-copy"></i> Kopyala</button>
-                </div>
-                <div class="video-box"><video controls><source src="deposit.mp4" type="video/mp4">Tarayıcınız bu videoyu desteklemiyor.</video></div>
-            </details>
+        <!-- Hpay -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3><div class="icon-box">◆</div> Hpay (Para Gönderme)</h3>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="accordion-content">
+                Sunucudaki diğer kullanıcılara kolayca para göndermeni sağlar.<br>
+                <strong>Kullanım Örneği:</strong> hpay @kullanici miktar
+            </div>
         </div>
 
-        <!-- 4. withdraw -->
-        <div class="feature-card">
-            <details>
-                <summary>
-                    <div class="feature-icon"><i class="fa-solid fa-money-bill-transfer"></i></div>
-                    Bankadan Para Çekme
-                </summary>
-                <div class="command-preview">
-                    <code>withdraw [miktar]</code>
-                    <button class="copy-btn" onclick="copyCommand('withdraw', this)"><i class="fa-regular fa-copy"></i> Kopyala</button>
-                </div>
-                <div class="video-box"><video controls><source src="withdraw.mp4" type="video/mp4">Tarayıcınız bu videoyu desteklemiyor.</video></div>
-            </details>
+        <!-- Oyunlar (HJ, HF, HS) -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3><div class="icon-box">◆</div> HJ - HF - HS Oyunları</h3>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="accordion-content">
+                Bu komutları kullanarak eğlenceli şans ve kumar oyunları oynayabilir, paranı katlayabilirsin.<br>
+                <strong>Kullanım Örneği:</strong> hj miktar (Örn: hj 5000)
+            </div>
         </div>
 
-        <!-- 5. daily -->
-        <div class="feature-card">
-            <details>
-                <summary>
-                    <div class="feature-icon"><i class="fa-solid fa-calendar-day"></i></div>
-                    Günlük Ödül
-                </summary>
-                <div class="command-preview">
-                    <code>daily</code>
-                    <button class="copy-btn" onclick="copyCommand('daily', this)"><i class="fa-regular fa-copy"></i> Kopyala</button>
-                </div>
-                <div class="video-box"><video controls><source src="daily.mp4" type="video/mp4">Tarayıcınız bu videoyu desteklemiyor.</video></div>
-            </details>
+        <!-- Kasa -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3><div class="icon-box">◆</div> Kasalar</h3>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="accordion-content">
+                Sistemde Normal, Lüks ve Mega olmak üzere 3 farklı kasa türü bulunur. Örneğin Normal kasayı açtığında şansına bağlı olarak 10 bin ile 50 bin arasında rastgele nakit ödül kazanabilirsin. Diğer kasalarda bu ödüller katlanarak artar!
+            </div>
         </div>
 
-        <!-- 6. hj -->
-        <div class="feature-card">
-            <details>
-                <summary>
-                    <div class="feature-icon"><i class="fa-solid fa-diamond"></i></div>
-                    Blackjack Oyunu
-                </summary>
-                <div class="command-preview">
-                    <code>hj [bahis]</code>
-                    <button class="copy-btn" onclick="copyCommand('hj', this)"><i class="fa-regular fa-copy"></i> Kopyala</button>
-                </div>
-                <div class="video-box"><video controls><source src="hj.mp4" type="video/mp4">Tarayıcınız bu videoyu desteklemiyor.</video></div>
-            </details>
-        </div>
-
-        <!-- 7. hf -->
-        <div class="feature-card">
-            <details>
-                <summary>
-                    <div class="feature-icon"><i class="fa-solid fa-coins"></i></div>
-                    Yazı Tura Oyunu
-                </summary>
-                <div class="command-preview">
-                    <code>hf [bahis] [yazı/tura]</code>
-                    <button class="copy-btn" onclick="copyCommand('hf', this)"><i class="fa-regular fa-copy"></i> Kopyala</button>
-                </div>
-                <div class="video-box"><video controls><source src="hf.mp4" type="video/mp4">Tarayıcınız bu videoyu desteklemiyor.</video></div>
-            </details>
-        </div>
-
-        <!-- 8. hs -->
-        <div class="feature-card">
-            <details>
-                <summary>
-                    <div class="feature-icon"><i class="fa-solid fa-slot-machine"></i></div>
-                    Slot Makinası
-                </summary>
-                <div class="command-preview">
-                    <code>hs [bahis]</code>
-                    <button class="copy-btn" onclick="copyCommand('hs', this)"><i class="fa-regular fa-copy"></i> Kopyala</button>
-                </div>
-                <div class="video-box"><video controls><source src="hs.mp4" type="video/mp4">Tarayıcınız bu videoyu desteklemiyor.</video></div>
-            </details>
-        </div>
-
-        <!-- 9. hpay -->
-        <div class="feature-card">
-            <details>
-                <summary>
-                    <div class="feature-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
-                    Para Transferi
-                </summary>
-                <div class="command-preview">
-                    <code>hpay [@kullanıcı] [miktar]</code>
-                    <button class="copy-btn" onclick="copyCommand('hpay', this)"><i class="fa-regular fa-copy"></i> Kopyala</button>
-                </div>
-                <div class="video-box"><video controls><source src="hpay.mp4" type="video/mp4">Tarayıcınız bu videoyu desteklemiyor.</video></div>
-            </details>
-        </div>
-
-        <!-- 10. shop -->
-        <div class="feature-card">
-            <details>
-                <summary>
-                    <div class="feature-icon"><i class="fa-solid fa-store"></i></div>
-                    Mağaza Görüntüleme
-                </summary>
-                <div class="command-preview">
-                    <code>shop</code>
-                    <button class="copy-btn" onclick="copyCommand('shop', this)"><i class="fa-regular fa-copy"></i> Kopyala</button>
-                </div>
-                <div class="video-box"><video controls><source src="shop.mp4" type="video/mp4">Tarayıcınız bu videoyu desteklemiyor.</video></div>
-            </details>
-        </div>
-
-        <!-- 11. lb -->
-        <div class="feature-card">
-            <details>
-                <summary>
-                    <div class="feature-icon"><i class="fa-solid fa-trophy"></i></div>
-                    Sunucu Sıralaması
-                </summary>
-                <div class="command-preview">
-                    <code>lb</code>
-                    <button class="copy-btn" onclick="copyCommand('lb', this)"><i class="fa-regular fa-copy"></i> Kopyala</button>
-                </div>
-                <div class="video-box"><video controls><source src="lb.mp4" type="video/mp4">Tarayıcınız bu videoyu desteklemiyor.</video></div>
-            </details>
-        </div>
-
-        <!-- 12. Normal Kasa -->
-        <div class="feature-card">
-            <details>
-                <summary>
-                    <div class="feature-icon"><i class="fa-solid fa-box-open"></i></div>
-                    Normal Kasa Açılımı
-                </summary>
-                <div class="command-preview">
-                    <code>kasa normal</code>
-                    <button class="copy-btn" onclick="copyCommand('kasa normal', this)"><i class="fa-regular fa-copy"></i> Kopyala</button>
-                </div>
-                <div class="video-box"><video controls><source src="kasa_normal.mp4" type="video/mp4">Tarayıcınız bu videoyu desteklemiyor.</video></div>
-            </details>
-        </div>
-
-        <!-- 13. Lüks Kasa -->
-        <div class="feature-card">
-            <details>
-                <summary>
-                    <div class="feature-icon"><i class="fa-solid fa-box-open"></i></div>
-                    Lüks Kasa Açılımı
-                </summary>
-                <div class="command-preview">
-                    <code>kasa lüks</code>
-                    <button class="copy-btn" onclick="copyCommand('kasa lüks', this)"><i class="fa-regular fa-copy"></i> Kopyala</button>
-                </div>
-                <div class="video-box"><video controls><source src="kasa_luks.mp4" type="video/mp4">Tarayıcınız bu videoyu desteklemiyor.</video></div>
-            </details>
-        </div>
-
-        <!-- 14. Mega Kasa -->
-        <div class="feature-card">
-            <details>
-                <summary>
-                    <div class="feature-icon"><i class="fa-solid fa-box-open"></i></div>
-                    Mega Kasa Açılımı
-                </summary>
-                <div class="command-preview">
-                    <code>kasa mega</code>
-                    <button class="copy-btn" onclick="copyCommand('kasa mega', this)"><i class="fa-regular fa-copy"></i> Kopyala</button>
-                </div>
-                <div class="video-box"><video controls><source src="kasa_mega.mp4" type="video/mp4">Tarayıcınız bu videoyu desteklemiyor.</video></div>
-            </details>
-        </div>
-
-        <!-- Destek / DM Modmail Alanı -->
-        <div class="support-section">
-            <h3>Yardıma mı ihtiyacın var?</h3>
-            <p>Hata bildirimi, öneriler veya destek almak için butona tıklayarak doğrudan botuma özel mesaj (DM) gönderebilirsin!</p>
-            <a href="https://discord.com/users/1535214032137756702" class="btn-discord-join" target="_blank">
-                <i class="fa-brands fa-discord"></i> Bot ile DM'den İletişime Geç
-            </a>
-        </div>
-    </section>
-
-    <!-- Sağ Alt Köşe Bildirim Kutusu -->
-    <div id="toast">
-        <i class="fa-solid fa-circle-check"></i>
-        <span id="toastText">Komut panoya kopyalandı!</span>
     </div>
 
-    <!-- Footer ve v1.0 Sürümü -->
-    <footer>
-        <span class="footer-version">HelperX v1.0 Sürümü</span>
-        <p>&copy; 2026 HelperX. Tüm Hakları Saklıdır.</p>
-    </footer>
-
-    <!-- Scriptler (Kopyalama ve Toast) -->
     <script>
-        function copyCommand(text, btn) {
-            navigator.clipboard.writeText(text);
-            
-            let originalHTML = btn.innerHTML;
-            btn.innerHTML = '<i class="fa-solid fa-check"></i> Kopyalandı';
-            btn.style.color = '#66fcf1';
+        const items = document.querySelectorAll('.accordion-item');
 
-            showToast(`"${text}" komutu kopyalandı!`);
-
-            setTimeout(() => {
-                btn.innerHTML = originalHTML;
-                btn.style.color = '#c5c6c7';
-            }, 1500);
-        }
-
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            const toastText = document.getElementById('toastText');
-            toastText.innerText = message;
-            
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2000);
-        }
+        items.forEach(item => {
+            const header = item.querySelector('.accordion-header');
+            header.addEventListener('click', () => {
+                // Diğer açık olanları kapatmak istersen bu bloğu açabilirsin
+                // items.forEach(i => { if(i !== item) i.classList.remove('active'); });
+                
+                item.classList.toggle('active');
+            });
+        });
     </script>
 
 </body>
