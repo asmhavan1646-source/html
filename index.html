@@ -33,7 +33,6 @@
             cursor: pointer;
             animation: pulseZoom 4s infinite ease-in-out;
             filter: drop-shadow(0 0 35px rgba(102, 252, 241, 0.45));
-            /* Tıklandığında büyüme süresini tam istediğin gibi 4.5 saniyeye çıkardık */
             transition: transform 4.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 4.5s ease;
             z-index: 10;
         }
@@ -46,13 +45,23 @@
         }
 
         .hero h1 { margin-top: 25px; font-size: 58px; color: var(--secondary-color); }
-        .hero p { color: #c5c6c7; font-size: 20px; margin-top: 10px; margin-bottom: 30px; }
+        .hero p { color: #c5c6c7; font-size: 20px; margin-top: 10px; margin-bottom: 25px; }
+
+        /* Butonlar Grubu */
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+            width: 100%;
+            max-width: 320px;
+        }
 
         .btn-invite {
             background: linear-gradient(135deg, #66fcf1, #45a29e);
             color: #0b0c10;
-            padding: 16px 40px;
-            font-size: 18px;
+            padding: 15px 30px;
+            font-size: 17px;
             font-weight: 700;
             border-radius: 30px;
             text-decoration: none;
@@ -60,11 +69,41 @@
             transition: transform 0.3s, box-shadow 0.3s;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
+            width: 100%;
+            white-space: nowrap; /* Yazının alt alta kaymasını kesin olarak engeller */
         }
         .btn-invite:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(102, 252, 241, 0.6);
+        }
+
+        /* Bot İletişim / Yardım ve Destek Butonu Tasarımı */
+        .btn-support {
+            background: rgba(31, 40, 51, 0.85);
+            border: 1px solid rgba(102, 252, 241, 0.4);
+            color: var(--secondary-color);
+            padding: 14px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 30px;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            white-space: nowrap;
+        }
+        .btn-support:hover {
+            background: var(--secondary-color);
+            color: #0b0c10;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 252, 241, 0.5);
         }
 
         /* Ana İçerik Ekranı */
@@ -279,9 +318,17 @@
         <img src="logo.png" alt="HelperX Logo" class="logo-img" id="mainLogo" onerror="this.src='logo.jpg'">
         <h1>HelperX</h1>
         <p>Gelişmiş Discord Oyun ve Ekonomi Botu</p>
-        <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank">
-            <i class="fa-solid fa-robot"></i> Botu Sunucuna Ekle
-        </a>
+        
+        <!-- Butonların Olduğu Alan -->
+        <div class="hero-buttons">
+            <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank">
+                <i class="fa-solid fa-robot"></i> Botu Sunucuna Ekle
+            </a>
+            <!-- Yardım ve Destek / Bot DM Butonu -->
+            <a href="https://discord.com/users/1535214032137756702" class="btn-support" target="_blank">
+                <i class="fa-solid fa-headset"></i> Yardım ve Destek
+            </a>
+        </div>
     </section>
 
     <!-- 2. ANA İÇERİK EKRANI -->
@@ -315,7 +362,7 @@
             <div class="orbit-text">
                 <h2>Ekonomi, şans oyunları ve eğlence tek panelden yönetilsin</h2>
                 <p>HelperX ile üyelerin cüzdanlarını büyütebilir, blackjack ve çeşitli şans oyunları oynatabilir, günlük ödüller ve kasalarla sunucunda nefis bir ekonomi ortamı kurabilirsin.</p>
-                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank">
+                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank" style="max-width: 250px;">
                     <i class="fa-solid fa-robot"></i> Sunucuna Davet Et
                 </a>
             </div>
@@ -326,7 +373,7 @@
             <div class="showcase-text">
                 <h2>Bankaya Para Yatırma Sistemi</h2>
                 <p>Bankaya para yatırarak her 1 saat içinde paranı katlayabilir, faiz geliri elde edebilirsin. Paranı güvende tutmanın ve büyütmenin en iyi yolu!</p>
-                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank"><i class="fa-solid fa-robot"></i> Hemen Dene</a>
+                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank" style="max-width: 200px;"><i class="fa-solid fa-robot"></i> Hemen Dene</a>
             </div>
             <div class="showcase-card-container">
                 <div class="discord-preview-card">
@@ -347,7 +394,7 @@
             <div class="showcase-text">
                 <h2>Shop (Mağaza) Sistemi</h2>
                 <p>Biriktirdiğin paralarla mağazadan özel roller ve ödüller satın alabilir, sunucudaki ayrıcalıklarını artırabilirsin.</p>
-                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank"><i class="fa-solid fa-robot"></i> Mağazayı Gör</a>
+                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank" style="max-width: 200px;"><i class="fa-solid fa-robot"></i> Mağazayı Gör</a>
             </div>
             <div class="showcase-card-container">
                 <div class="discord-preview-card">
@@ -368,7 +415,7 @@
             <div class="showcase-text">
                 <h2>Kişisel Profil Sistemi</h2>
                 <p>Cüzdanındaki parayı, bankandaki toplam servetini ve tüm finansal durumunu tek komutla detaylıca görüntüle.</p>
-                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank"><i class="fa-solid fa-robot"></i> Profiline Bak</a>
+                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank" style="max-width: 200px;"><i class="fa-solid fa-robot"></i> Profiline Bak</a>
             </div>
             <div class="showcase-card-container">
                 <div class="discord-preview-card">
@@ -389,7 +436,7 @@
             <div class="showcase-text">
                 <h2>Hpay (Para Gönderme)</h2>
                 <p>Sunucudaki diğer kullanıcılara kolayca para transfer edebilir, arkadaşlarını zenginleştirebilir veya borç ödeyebilirsin.</p>
-                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank"><i class="fa-solid fa-robot"></i> Transfer Yap</a>
+                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank" style="max-width: 200px;"><i class="fa-solid fa-robot"></i> Transfer Yap</a>
             </div>
             <div class="showcase-card-container">
                 <div class="discord-preview-card">
@@ -410,7 +457,7 @@
             <div class="showcase-text">
                 <h2>HJ Oyunu (Blackjack)</h2>
                 <p>Klasik Blackjack heyecanını Discord sunucunda yaşa! Miktarını belirle, kartlarını çek ve paranı katlayarak masadan mutlu ayrıl.</p>
-                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank"><i class="fa-solid fa-robot"></i> Masaya Otur</a>
+                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank" style="max-width: 200px;"><i class="fa-solid fa-robot"></i> Masaya Otur</a>
             </div>
             <div class="showcase-card-container">
                 <div class="discord-preview-card">
@@ -431,7 +478,7 @@
             <div class="showcase-text">
                 <h2>HF Oyunu</h2>
                 <p>Heyecan dolu HF şans oyununu oynayarak cüzdanındaki parayı katlama şansı yakala. Risk al, büyük ödülü kazan!</p>
-                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank"><i class="fa-solid fa-robot"></i> Oyunu Oyna</a>
+                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank" style="max-width: 200px;"><i class="fa-solid fa-robot"></i> Oyunu Oyna</a>
             </div>
             <div class="showcase-card-container">
                 <div class="discord-preview-card">
@@ -452,7 +499,7 @@
             <div class="showcase-text">
                 <h2>HS Oyunu</h2>
                 <p>HS komutunu kullanarak miktar belirtip şansını deneyebilir, sunucundaki üyelerle rekabet ederek paranı katlayabilirsin.</p>
-                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank"><i class="fa-solid fa-robot"></i> Hemen Dene</a>
+                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank" style="max-width: 200px;"><i class="fa-solid fa-robot"></i> Hemen Dene</a>
             </div>
             <div class="showcase-card-container">
                 <div class="discord-preview-card">
@@ -473,7 +520,7 @@
             <div class="showcase-text">
                 <h2>Kasa Açılımı Sistemi</h2>
                 <p>Normal, Lüks ve Mega olmak üzere 3 farklı kasa türü bulunur. Kasaları açarak büyük miktarlarda nakit ödüllerin sahibi ol!</p>
-                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank"><i class="fa-solid fa-robot"></i> Kasa Aç</a>
+                <a href="https://discord.com/oauth2/authorize?client_id=1535214032137756702&scope=bot&permissions=8" class="btn-invite" target="_blank" style="max-width: 200px;"><i class="fa-solid fa-robot"></i> Kasa Aç</a>
             </div>
             <div class="showcase-card-container">
                 <div class="discord-preview-card">
@@ -496,19 +543,17 @@
 
     </div>
 
-    <!-- Script: ~4.5 Saniyelik Sinematik Büyüme ve Geri Dönüş Mantığı -->
+    <!-- Script -->
     <script>
         const logo = document.getElementById('mainLogo');
         const heroSection = document.getElementById('heroSection');
         const mainContent = document.getElementById('mainContent');
         const backBtn = document.getElementById('backBtn');
 
-        // Logoya tıklayınca ~4.5 saniye süren devasa büyüme animasyonu
         logo.addEventListener('click', function() {
             this.style.transform = 'scale(8)';
             this.style.opacity = '0';
 
-            // Animasyon süresiyle tam uyumlu olacak şekilde 4.3 saniye sonra diğer sayfayı açıyoruz
             setTimeout(() => {
                 heroSection.style.display = 'none';
                 mainContent.classList.add('active');
@@ -516,12 +561,10 @@
             }, 4300);
         });
 
-        // Geri Dön tuşuna basınca ilk ekrana pürüzsüz dönüş
         backBtn.addEventListener('click', function() {
             mainContent.classList.remove('active');
             heroSection.style.display = 'flex';
             
-            // Logoyu anında eski boyutuna sıfırlıyoruz
             logo.style.transition = 'none';
             logo.style.transform = 'scale(1)';
             logo.style.opacity = '1';
